@@ -17,7 +17,7 @@ npm install
 > https://mochajs.org
 
 
-### run your tests
+### run tests
 ```
 npm test
 ```
