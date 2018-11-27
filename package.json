@@ -1,5 +1,9 @@
 {
-"scripts": {
-  "test": "mocha"
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "mocha": "^5.2.0",
+    "vue": "^2.5.17"
   }
 }
