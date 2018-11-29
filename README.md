@@ -1,24 +1,29 @@
 # fictional-octo-succotash
 
-### install npm
-> https://www.npmjs.com/get-npm
-
-### install npm packages from package.json
+## Project setup
 ```
 npm install
 ```
 
-### add type checking to JavaScript files
+### Compiles and hot-reloads for development
 ```
-//@ts-check
+npm run serve
 ```
 
-## Testing
-> https://mochajs.org
-
-
-### run tests
+### Compiles and minifies for production
 ```
-npm test
+npm run build
 ```
-> **`tests/test.js`** is an example test
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
