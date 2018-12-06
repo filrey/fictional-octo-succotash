@@ -10,7 +10,7 @@
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Kenvector Future;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -25,5 +25,10 @@
       color: #42b983;
     }
   }
+}
+
+@font-face {
+  font-family: Kenvector Future;
+  src: url(../src/assets/fonts/kenvector_future.ttf);
 }
 </style>
