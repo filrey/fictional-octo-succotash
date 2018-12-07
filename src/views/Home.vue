@@ -48,9 +48,7 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <!-- <v-flex shrink>
-            <h1>Hello</h1>
-          </v-flex>                     -->
+
         </v-layout>
       </v-container>
     </v-content>
@@ -63,6 +61,7 @@
 <script>
 // @ is an alias to /src
 // import Title from '@/views/Title.vue'
+import oldcrypt from '@/assets/music/oldcrypt.mp3'
 
 export default {
   name: 'home',
@@ -75,6 +74,10 @@ export default {
   props: {
   source: String
   }, 
+  mounted() {
+    var bgMusic = new Audio(oldcrypt)
+    bgMusic.play()
+  },
 
 }
 </script>
