@@ -76,6 +76,12 @@ export default {
   }, 
   mounted() {
     var bgMusic = new Audio(oldcrypt)
+    // This function loops the background music after it ends
+    bgMusic.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    //Play background music on page load
     bgMusic.play()
   },
 
