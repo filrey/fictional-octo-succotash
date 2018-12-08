@@ -2,6 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
+      mobile-break-point="10240"
       clipped
       fixed
       app
@@ -27,14 +28,14 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Settings</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-space-around justify-center column fill-height>
           <v-flex >
             <v-card>
-              <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
+              <v-parallax src="https://lh5.googleusercontent.com/WWfwsszAQRFIWnJ7GcZzfPbZw3fBYyLamp3Z879eHM8NkhFz4XHXpyF5weXX3KtuA9qxrP_LHJQWIjiMw_QhSAONY_9NsmrDc8uYghn1=s1600"></v-parallax>
 
               <v-card-title primary-title>
                 <div>
@@ -44,7 +45,7 @@
               </v-card-title>
 
               <v-card-actions>
-                <v-btn color="green">Play</v-btn>
+                <router-link to="/Level1"><v-btn color="green">Play</v-btn></router-link>               
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -82,8 +83,15 @@ export default {
         this.play();
     }, false);
     //Play background music on page load
+
     bgMusic.play()
   },
 
 }
 </script>
+<style lang="scss">
+   a {
+    text-decoration: none;
+    }
+</style>
+
