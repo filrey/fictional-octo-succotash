@@ -35,7 +35,7 @@
         <v-layout align-space-around justify-center column fill-height>
           <v-flex >
             <v-card>
-              <v-parallax src="https://lh5.googleusercontent.com/WWfwsszAQRFIWnJ7GcZzfPbZw3fBYyLamp3Z879eHM8NkhFz4XHXpyF5weXX3KtuA9qxrP_LHJQWIjiMw_QhSAONY_9NsmrDc8uYghn1=s1600"></v-parallax>
+              <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
 
               <v-card-title primary-title>
                 <div>
