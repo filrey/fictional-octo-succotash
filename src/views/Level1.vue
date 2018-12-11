@@ -254,7 +254,7 @@
 
 .orpheus {
 	position:absolute;
-	top:-20px;
+	top:0px;
   right:0px;
   bottom: 400px;
   left:0px;
