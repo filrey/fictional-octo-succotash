@@ -137,8 +137,8 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+  <div id="orphy" class="orpheus"></div>
 </div>
-
 </template>
 
 <script>
@@ -206,7 +206,7 @@
 .blinking{
 	animation:blinkingText 0.8s infinite;
 }
-@keyframes blinkingText{
+@keyframes blinkingText {
 	0%{		color: rgb(255, 8, 8);	}
 	49%{	color: transparent;	}
 	50%{	color: transparent;	}
@@ -246,5 +246,28 @@
 .option:hover div {
   color: #000;
   margin-top: -37px;
+}
+
+@keyframes play {
+  100% { background-position: -1900px; }
+}
+
+.orpheus {
+	position:absolute;
+	top:-20px;
+  right:0px;
+  bottom: 400px;
+  left:0px;
+	width:50px;
+	height:50px;
+	image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+  background: url('../assets/images/orpheus_idle.png');
+  animation: play 0.8s steps(2) infinite;
 }
 </style>
