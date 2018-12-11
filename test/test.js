@@ -6,3 +6,11 @@ describe('Array', function() {
     });
   });
 });
+
+describe('State', function () {
+  describe('currentPlayer', function () {
+    it('should return  the current players internal state', function () {
+      assert.equal([1, 2, 3].indexOf(4), -1);
+    });
+  });
+});
