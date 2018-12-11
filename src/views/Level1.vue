@@ -31,14 +31,6 @@
     item-key="name"
     open-on-click
   >
-    <template slot="prepend" slot-scope="{ item, open, leaf }">
-      <v-icon v-if="!item.file">
-        {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-      </v-icon>
-      <v-icon v-else>
-        {{ files[item.file] }}
-      </v-icon>
-    </template>
   </v-treeview>
 </template>
         </v-card-text>
@@ -80,9 +72,12 @@
         </v-card-title>
 
         <v-card-text>
-        MAP INFORMATION
+        <div id="myMap"></div>
         </v-card-text>
-
+          <img width="450px" height="300px" src="@/assets/images/map.png"/>
+          <span class="location blinking">
+           *
+          </span>
         <v-divider></v-divider>
 
         <v-card-actions>
@@ -120,7 +115,12 @@
         </v-card-title>
 
         <v-card-text>
-        Settings menu
+          <br>
+        <div class="abs-center container">
+          <div class="option"><div>EASY<br>WEAK</div></div>
+          <div class="option"><div>MEDIUM<br>Okay</div></div>
+          <div class="option"><div>HARD<br>Ouch...</div></div>
+        </div>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -198,6 +198,53 @@
         },
       ]
       }
-    }
+    },
   }
 </script>
+
+<style>
+.blinking{
+	animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+	0%{		color: rgb(255, 8, 8);	}
+	49%{	color: transparent;	}
+	50%{	color: transparent;	}
+	99%{	color:transparent;	}
+	100%{	color: rgb(255, 0, 0);	}
+}
+
+.location {
+  font-size: 50px;
+  position:absolute;
+  top:250px;
+  left:250px;
+  }
+
+.container {
+  display: inline;
+}
+.abs-center {
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.option {
+  left: 100px;
+  height: 40px;
+  width: 210px;
+  margin: 10px auto;
+  line-height: 36px;
+  letter-spacing: 3px;
+  border: 2px solid #aaa;
+  color: #aaa;
+  cursor: pointer;
+  overflow: hidden;
+}
+.option:hover {
+  border: 2px solid #000;
+}
+.option:hover div {
+  color: #000;
+  margin-top: -37px;
+}
+</style>
