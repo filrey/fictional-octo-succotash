@@ -35,8 +35,7 @@
         <v-layout align-space-around justify-center column fill-height>
           <v-flex >
             <v-card>
-              <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
-
+              <img width="75%" src="@/assets/images/concept.png">
               <v-card-title primary-title>
                 <div>
                   <h3 class="headline mb-0">Fictional-Octo-Succotash</h3>
@@ -45,7 +44,7 @@
               </v-card-title>
 
               <v-card-actions>
-                <router-link to="/Level1"><v-btn color="green">Play</v-btn></router-link>               
+                <router-link to="/Level1"><v-btn color="green">Play</v-btn></router-link>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -67,14 +66,14 @@ import oldcrypt from '@/assets/music/oldcrypt.mp3'
 export default {
   name: 'home',
   components: {
-    
+
   },
   data: () => ({
     drawer: null
   }),
   props: {
   source: String
-  }, 
+  },
   mounted() {
     var bgMusic = new Audio(oldcrypt)
     // This function loops the background music after it ends

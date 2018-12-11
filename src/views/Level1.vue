@@ -2,7 +2,7 @@
 <div style="display: inline-block;">
   <!-- Skills -->
     <v-dialog
-      v-model="dialog"
+      v-model="skills"
       width="500"
     >
       <v-btn
@@ -18,11 +18,29 @@
           class="headline grey lighten-2"
           primary-title
         >
-          Options
+        Skills
         </v-card-title>
 
         <v-card-text>
-        MAP INFORMATION
+      <template>
+  <v-treeview
+    v-model="tree"
+    :open="open"
+    :items="items"
+    activatable
+    item-key="name"
+    open-on-click
+  >
+    <template slot="prepend" slot-scope="{ item, open, leaf }">
+      <v-icon v-if="!item.file">
+        {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+      </v-icon>
+      <v-icon v-else>
+        {{ files[item.file] }}
+      </v-icon>
+    </template>
+  </v-treeview>
+</template>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -32,7 +50,7 @@
           <v-btn
             color="primary"
             flat
-            @click="dialog = false"
+            @click="skills = false"
           >
             Close
           </v-btn>
@@ -42,7 +60,7 @@
 
       <!-- map -->
     <v-dialog
-      v-model="dialog"
+      v-model="map"
       width="500"
     >
       <v-btn
@@ -58,7 +76,7 @@
           class="headline grey lighten-2"
           primary-title
         >
-          Options
+         MAP
         </v-card-title>
 
         <v-card-text>
@@ -72,7 +90,7 @@
           <v-btn
             color="primary"
             flat
-            @click="dialog = false"
+            @click="map = false"
           >
             Close
           </v-btn>
@@ -81,7 +99,7 @@
     </v-dialog>
 
     <v-dialog
-      v-model="dialog"
+      v-model="options"
       width="500"
     >
       <v-btn
@@ -98,11 +116,11 @@
           class="headline grey lighten-2"
           primary-title
         >
-          Options
+          Settings
         </v-card-title>
 
         <v-card-text>
-        OPTIONS
+        Settings menu
         </v-card-text>
 
         <v-divider></v-divider>
@@ -112,7 +130,7 @@
           <v-btn
             color="primary"
             flat
-            @click="dialog = false"
+            @click="options = false"
           >
             Close
           </v-btn>
@@ -128,8 +146,57 @@
   export default {
     data () {
       return {
-        bottomNav: 'recent',
-        dialog: false
+        skills: false,
+        options: false,
+        map: false,
+        open: ['Skill-3'],
+        files: {
+          fire: 'fire type',
+          water: 'water type',
+          earth: 'earth type',
+          void: 'void type',
+        },
+      tree: [],
+      items: [
+        {
+          name: 'Skill-1',
+          type: 'fire'
+        },
+        {
+          name: 'Fire Skills',
+          children: [
+            {
+              name: 'meteor',
+              type: 'fire',
+            },
+            {
+              name: 'fire 2',
+              type: 'fire',
+            },
+            {
+              name: 'fire 3',
+              type: 'fire'
+            }
+          ]
+        },
+        {
+          name: 'Void Skills',
+          children: [
+            {
+              name: 'nightmare',
+              type: 'void',
+            },
+            {
+              name: 'dream',
+              type: 'void'
+            },
+            {
+              name: 'skill-5',
+              type: 'void'
+            }
+          ]
+        },
+      ]
       }
     }
   }
