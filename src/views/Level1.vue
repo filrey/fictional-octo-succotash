@@ -137,13 +137,37 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+      <v-progress-circular
+        :rotate="360"
+        :size="100"
+        :width="15"
+        :value="50"
+        color="red"
+      >
+        HP: 50
+      </v-progress-circular>
+            <v-progress-circular
+        :rotate="360"
+        :size="100"
+        :width="15"
+        :value="75"
+        color="blue"
+      >
+        MP: 75
+      </v-progress-circular>
+      <skill-view></skill-view>
   <div id="orphy" class="orpheus"></div>
 </div>
 </template>
 
 <script>
+  //UI
+  import SkillView from '@/components/Skills.vue'
 
   export default {
+    components: {
+      SkillView
+    },
     data () {
       return {
         skills: false,
@@ -198,6 +222,9 @@
         },
       ]
       }
+    },
+    methods: {
+
     },
   }
 </script>
