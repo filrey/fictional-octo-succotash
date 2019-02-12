@@ -6,22 +6,28 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     skills: {
-      fire : 0,
-      water : 0,
-      thunder: 0,
-      void: 0,
-      music: 0,
+      fire : {name: 'fire', level: 0},
+      water : {name: 'water', level: 0},
+      thunder: {name: 'thunder', level: 0},
+      void: {name: 'void', level: 0},
+      music: {name: 'music', level: 0},
     },
     player: {
+      name: 'Orpheous',
       hp : 100,
       mp : 100,
-      exp: 0,
+      exp: 50,
     }
   },
   mutations: {
+    //SKILLS
     levelUpSkill(state) {
       // NEED TO DO - allow level ups based on skill 
-      state.skills.fire++;
+      state.skills.fire.level++;
+    },
+    //EXP
+    randExp(state){
+      state.player.exp = Math.floor(Math.random() * 100); 
     }
 
   },

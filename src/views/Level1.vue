@@ -156,17 +156,21 @@
         MP: 75
       </v-progress-circular>
       <skill-view></skill-view>
+      <exp-view></exp-view>
   <div id="orphy" class="orpheus"></div>
 </div>
 </template>
 
 <script>
   //UI
-  import SkillView from '@/components/Skills.vue'
+  import SkillView from '@/components/UI/Skills.vue'
+  import ExpView from '@/components/UI/Exp.vue'
+
 
   export default {
     components: {
-      SkillView
+      SkillView,
+      ExpView
     },
     data () {
       return {
