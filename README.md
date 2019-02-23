@@ -1,4 +1,4 @@
-# fictional-octo-succotash
+# fos
 
 ## Project setup
 ```
