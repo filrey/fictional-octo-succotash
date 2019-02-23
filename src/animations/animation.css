@@ -1,0 +1,37 @@
+@keyframes play {
+    100% { background-position: -1900px; }
+}
+.player {
+    width:50px !important;
+    height:50px !important;
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    background: url('../../src/assets/images/orpheus_idle.png');
+    animation: play 0.8s steps(2) infinite;
+}
+
+.background {
+    background: rgb(52, 166, 251);
+    /* table-layout: fixed; */
+    border-spacing: 0;
+}
+.background td { padding: 0; }
+.lava { background: rgb(255, 100, 100); }
+.wall { background: white; }
+.actor { position: absolute; }
+.coin { background: rgb(241, 229, 89); }
+.lost .player { background: rgb(160, 64, 64); }
+.won .player {
+    box-shadow: -4px -7px 8px white, 4px -7px 8px white;
+}
+.game {
+    overflow: hidden;
+    max-width: 600px;
+    max-height: 500px;
+    position: relative;
+}
