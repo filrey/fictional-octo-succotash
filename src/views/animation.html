@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <div id ="app">
+      <div v-if = "playPressed">
+        <p>TRUE</p>
+      </div>
+      <button @click = "playSong" class = > Play </button>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+      </script>
+
+<script>
+ 
+  var mySound = new Audio('sounds/oldcrypt.mp3')
+
+    var app = new Vue({
+    el: '#app',
+    data: {
+    playPressed: false
+      },
+    methods:{
+      playSong(){
+      mySound.play()
+      this.playPressed = true
+    } 
+  }
+})
+ 
+  const sound1 = 'sounds/harp1.mp3';
+  const sound2 = 'sounds/harp2.mp3';
+  const sound3 = 'sounds/flute1.mp3';
+  const sound4 = 'sounds/flute2.mp3';
+
+new Vue({
+  el: '#app',
+  data: {
+    text: ''
+  },
+  created() {
+    this.onKeyDown = this.onKeyDown.bind(this);
+    document.addEventListener('keydown', this.onKeyDown);
+  },
+  destroyed() {
+    document.removeEventListener('keydown', this.onKeyDown);
+  },
+  methods: {
+    playSound (sound) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.play();
+      }
+    },
+    onKeyDown(e) {
+      switch (e.keyCode) {
+
+        //a
+        case 65: this.playSound(sound1); break;
+
+        //d
+        case 68: this.playSound(sound2); break;
+        
+        //s
+        case 83: this.playSound(sound3); break;
+
+        //w
+        case 87: this.playSound(sound4); break;
+        
+      }
+    },
+  }
+});
+
+</script>
+
+</body>
+  <div id="pane">
+    <div id="orphy" class="orpheus"></div>
+  </div>
+</html>
+
+<style>
+
+  @keyframes play {
+  100% { background-position: -1900px; }
+}
+.orpheus {
+  position:absolute;
+  top:20px;
+  right:0px;
+  bottom: 400px;
+  left:0px;
+  width:50px;
+  height:50px;
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+  background: url('../assets/images/orpheus_idle.png');
+  animation: play 0.8s steps(2) infinite;
+}
+#pane {
+    position:relative;
+    width:30%; height:38%;
+    border:2px solid red;
+}
+</style>
+
+<script>
+  var pane = $('#pane'),
+    box = $('#orphy'),
+    maxValue = pane.width() - box.width(),
+    keysPressed = {},
+    distancePerIteration = 3;
+
+  function calculateNewValue(oldValue, keyCode1, keyCode2) {
+    var newValue = parseInt(oldValue, 10)
+    - (keysPressed[keyCode1] ? distancePerIteration : 0)
+    + (keysPressed[keyCode2] ? distancePerIteration : 0);
+    return newValue < 0 ? 0 : newValue > maxValue ? maxValue : newValue;
+  }
+
+  $(window).keydown(function (event) { box.css('backgroundImage', 'url(../assets/images/orpheus_walk.png)'); keysPressed[event.which] = true; });
+  $(window).keyup(function (event) {    box.css('backgroundImage', 'url(../assets/images/orpheus_idle.png)'); keysPressed[event.which] = false; });
+
+  setInterval(function () {
+    box.css({
+      left: function (index, oldValue) {
+        return calculateNewValue(oldValue, 37, 39);
+      },
+      top: function (index, oldValue) {
+        return calculateNewValue(oldValue, 38, 40);
+      }
+    });
+  }, 20);
+</script>
