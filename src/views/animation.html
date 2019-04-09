@@ -2,6 +2,81 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
+  <body>
+
+    <div id ="app">
+      <div v-if = "playPressed">
+        <p>TRUE</p>
+      </div>
+      <button @click = "playSong" class = > Play </button>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+      </script>
+
+<script>
+ 
+  var mySound = new Audio('sounds/oldcrypt.mp3')
+
+    var app = new Vue({
+    el: '#app',
+    data: {
+    playPressed: false
+      },
+    methods:{
+      playSong(){
+      mySound.play()
+      this.playPressed = true
+    } 
+  }
+})
+ 
+  const sound1 = 'sounds/harp1.mp3';
+  const sound2 = 'sounds/harp2.mp3';
+  const sound3 = 'sounds/flute1.mp3';
+  const sound4 = 'sounds/flute2.mp3';
+
+new Vue({
+  el: '#app',
+  data: {
+    text: ''
+  },
+  created() {
+    this.onKeyDown = this.onKeyDown.bind(this);
+    document.addEventListener('keydown', this.onKeyDown);
+  },
+  destroyed() {
+    document.removeEventListener('keydown', this.onKeyDown);
+  },
+  methods: {
+    playSound (sound) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.play();
+      }
+    },
+    onKeyDown(e) {
+      switch (e.keyCode) {
+
+        //a
+        case 65: this.playSound(sound1); break;
+
+        //d
+        case 68: this.playSound(sound2); break;
+        
+        //s
+        case 83: this.playSound(sound3); break;
+
+        //w
+        case 87: this.playSound(sound4); break;
+        
+      }
+    },
+  }
+});
+
+</script>
+
+</body>
   <div id="pane">
     <div id="orphy" class="orpheus"></div>
   </div>
