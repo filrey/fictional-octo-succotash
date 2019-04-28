@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       mobile-break-point="10240"
@@ -26,35 +26,18 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app fixed clipped-left>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Settings</v-toolbar-title>
-    </v-toolbar>
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout align-space-around justify-center column fill-height>
-          <v-flex >
-            <v-card>
-              <img width="75%" src="@/assets/images/concept.png">
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0">Fictional-Octo-Succotash</h3>
-                  <div class="text-xs-left">The story of Orpheous</div>
-                </div>
-              </v-card-title>
-
+    <v-content class="homeBG">
+      <v-container>
+        <v-layout  align-center justify-center>
+          <v-card class="opacity50" width="150vh">
+            <v-card-title primary-title ><v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon><h1>Fictional-Octo-Succotash</h1></v-card-title>
               <v-card-actions>
                 <router-link to="/Level1"><v-btn color="green">Play</v-btn></router-link>
               </v-card-actions>
-            </v-card>
-          </v-flex>
-
+          </v-card>
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer app fixed>
-      <span>&copy; 2018</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -83,14 +66,33 @@ export default {
     }, false);
     //Play background music on page load
 
-    bgMusic.play()
+    // bgMusic.play()
   },
 
 }
 </script>
 <style lang="scss">
-   a {
+
+  a {
     text-decoration: none;
-    }
+  }
+  .homeBG{
+    background-image: url('../assets/images/environment_forestbackground.png');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+  }
+  .fillHeight{
+    height: 90vh;
+  }
+
+  .title{
+    width: 100vh;
+    max-height: 85px;
+  }
+  .opacity50{
+    opacity: .8;
+  }
 </style>
 
