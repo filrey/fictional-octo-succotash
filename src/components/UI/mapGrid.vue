@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="gridBG">
         <v-container>
             <v-layout row wrap v-for="j in rows" :key="j">
                 <v-flex v-for="n in columns" :key="n">
-                    <v-card height="100px" width="calc(100%)">
+                    <v-card color="rgb(255, 255, 255, 0.5)" height="100px" width="calc(100%)">
                         Row {{j}}
                         Cell {{n}}
                         <div v-if="currentX == j && currentY == n" id="orphy" class="orpheus"></div>
@@ -47,3 +47,13 @@ export default {
   },
 }
 </script>
+
+<style lang="css">
+    .gridBG{
+     background-image: url('../../assets/images/environment_forestbackground.png');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+    }
+</style>
