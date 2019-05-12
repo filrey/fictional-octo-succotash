@@ -7,7 +7,7 @@
   import MapGrid from '@/components/UI/mapGrid.vue'
 
 export default {
-    name: 'Level 2',
+    name: 'Level-2',
     components: {
       MapGrid
     },
