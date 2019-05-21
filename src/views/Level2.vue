@@ -15,5 +15,10 @@ export default {
       MapGrid,
       Drawer
     },
+    data () {
+      return {
+        encounters: 10
+      }
+    }
 }
 </script>

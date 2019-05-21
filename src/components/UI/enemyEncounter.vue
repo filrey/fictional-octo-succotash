@@ -1,0 +1,44 @@
+<template>
+  <div>
+    This is the enemy encounter vue
+    <v-dialog v-model="dialog" width="80%">
+      <v-card class="gridBG encounterBoxHeight">
+        <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title>
+
+        <!-- <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text> -->
+
+        <!-- <v-divider></v-divider> -->
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <!-- <v-btn color="primary" flat @click="dialog = false">I accept</v-btn> -->
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "enemyEncounter",
+  data() {
+    return {
+      dialog: true
+    };
+  }
+};
+</script>
+
+<style lang="css">
+    .gridBG{
+     background-image: url('../../assets/images/environment_forestbackground.png');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+    }
+
+    .encounterBoxHeight{
+        height: 600px;
+    }
+</style>

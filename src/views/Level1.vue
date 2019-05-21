@@ -157,7 +157,8 @@
       </v-progress-circular>
       <skill-view></skill-view>
       <exp-view></exp-view>
-      <map-grid></map-grid>
+      <!-- <map-grid></map-grid> -->
+      <enemy-encounter></enemy-encounter>
   <div id="orphy" class="orpheus"></div>
 </div>
 </template>
@@ -167,13 +168,15 @@
   import SkillView from '@/components/UI/Skills.vue'
   import ExpView from '@/components/UI/Exp.vue'
   import MapGrid from '@/components/UI/mapGrid.vue'
+  import enemyEncounter from '@/components/UI/enemyEncounter.vue'
 
 
   export default {
     components: {
       SkillView,
       ExpView,
-      MapGrid
+      MapGrid,
+      enemyEncounter
     },
     data () {
       return {
