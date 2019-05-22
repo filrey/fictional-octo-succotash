@@ -1,8 +1,7 @@
 <template>
     <div>
         <drawer></drawer>
-        <map-grid :numOfEncounters="encounters"></map-grid>
-        <enemy-encounter :isEncounterActive="isEncounterActive"></enemy-encounter>
+        <map-grid :numEncounters="numOfEncounters" :gridSizeX="gridSizeX" :gridSizeY="gridSizeY"></map-grid>
     </div>
 </template>
 <script>
@@ -19,7 +18,9 @@ export default {
     },
     data () {
       return {
-        encounters: 10,
+        numOfEncounters: 10,
+        gridSizeX: 10,
+        gridSizeY: 9,
         isEncounterActive: true
       }
     }
