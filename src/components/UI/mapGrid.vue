@@ -18,13 +18,15 @@
 import orpheus from '@/assets/images/orpheus_idle.png'
 export default {
     name: 'MapGrid',
+    props: ['numOfEncounters'],
     data() {
         return {
             orpheus: orpheus,
             currentX: 1,
             currentY: 1,
             rows: 9,
-            columns: 10
+            columns: 10,
+            encounters: this.numOfEncounters
         }
     },
     mounted: function () {
@@ -45,6 +47,11 @@ export default {
       }
     });
   },
+  computed: {
+    numOfCells() {
+      return this.rows * this.columns;
+    },
+  }
 }
 </script>
 

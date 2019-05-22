@@ -1,6 +1,6 @@
 <template>
     <div>
-        Current EXP: {{exp}}
+        EXP: {{exp}}
         <v-progress-linear v-model="exp" color="green" height="25"></v-progress-linear>
         <v-btn color="green" flat @click="()=> this.$store.commit('randExp')">Random Exp</v-btn>
     </div>
