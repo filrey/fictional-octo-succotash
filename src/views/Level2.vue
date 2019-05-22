@@ -1,8 +1,7 @@
 <template>
     <div>
         <drawer></drawer>
-        <map-grid :numOfEncounters="encounters"></map-grid>
-        <enemy-encounter :isEncounterActive="isEncounterActive"></enemy-encounter>
+        <map-grid :numEncounters="numOfEncounters"></map-grid>
     </div>
 </template>
 <script>
@@ -19,9 +18,41 @@ export default {
     },
     data () {
       return {
-        encounters: 10,
-        isEncounterActive: true
+        numOfEncounters: 10,
+        gridSizeX: 10,
+        gridSizeY: 9,
+        isEncounterActive: true,
+        encounterLocations: {
+          enemyXLocation:[],
+          enemyYLocation:[]
+        }
       }
-    }
+    },
+    created() {
+      this.populateEncounterLocations();
+    },
+    methods: {
+      populateEncounterLocations() {
+        this.encounterLocations.enemyXLocation = this.randomArrayNoRepeats(this.gridSizeX);
+        this.encounterLocations.enemyYLocation = this.randomArrayNoRepeats(this.gridSizeY);
+      },
+      randomArrayNoRepeats(arraySize) {
+        for (var a=[],i=0;i<arraySize;++i) a[i]=i;
+
+        function shuffle(array) {
+          var tmp, current, top = array.length;
+          if(top) while(--top) {
+            current = Math.floor(Math.random() * (top + 1));
+            tmp = array[current];
+            array[current] = array[top];
+            array[top] = tmp;
+          }
+          return array;
+        }
+
+        a = shuffle(a);   
+        return a;     
+      }
+    },
 }
 </script>

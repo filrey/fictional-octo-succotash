@@ -10,15 +10,20 @@
                     </v-card>
                 </v-flex>
             </v-layout>
+             <enemy-encounter :isEncounterActive="isEncounterActive"></enemy-encounter>
         </v-container>
     </div>
 </template>
 
 <script>
 import orpheus from '@/assets/images/orpheus_idle.png'
+import enemyEncounter from '@/components/UI/enemyEncounter.vue'
 export default {
     name: 'MapGrid',
     props: ['numOfEncounters'],
+    components: {
+      enemyEncounter
+    },
     data() {
         return {
             orpheus: orpheus,
@@ -26,7 +31,8 @@ export default {
             currentY: 1,
             rows: 9,
             columns: 10,
-            encounters: this.numOfEncounters
+            encounters: this.numOfEncounters,
+            isEncounterActive: true
         }
     },
     mounted: function () {
