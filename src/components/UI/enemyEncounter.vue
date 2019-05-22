@@ -61,9 +61,10 @@ export default {
     HpMp,
     Exp
   },
+  props: ['isEncounterActive'],
   data() {
     return {
-      dialog: true,
+      dialog: this.isEncounterActive,
       orpheus: orpheus
     };
   }

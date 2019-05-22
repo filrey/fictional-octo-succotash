@@ -1,27 +1,18 @@
 <template>
-    <div>
-    <v-progress-circular
-        :rotate="360"
-        :size="100"
-        :width="15"
-        :value="50"
-        color="red"
-      >
-        HP: 50
-      </v-progress-circular>
-            <v-progress-circular
-        :rotate="360"
-        :size="100"
-        :width="15"
-        :value="75"
-        color="blue"
-      >
-        MP: 75
-      </v-progress-circular>
-    </div>
+  <div>
+    <v-progress-circular :rotate="360" :size="100" :width="15" :value="hp" color="red">HP: {{hp}}</v-progress-circular>
+    <v-progress-circular :rotate="360" :size="100" :width="15" :value="mp" color="blue">MP: {{mp}}</v-progress-circular>
+  </div>
 </template>
 <script>
 export default {
-    
-}
+  computed: {
+    hp() {
+      return this.$store.state.player.hp;
+    },
+    mp() {
+      return this.$store.state.player.mp;
+    }
+  }
+};
 </script>
