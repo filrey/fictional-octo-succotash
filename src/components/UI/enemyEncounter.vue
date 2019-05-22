@@ -1,9 +1,8 @@
 <template>
   <div>
-    This is the enemy encounter vue
     <v-dialog v-model="dialog" width="80%">
       <v-card class="gridBG encounterBoxHeight">
-        <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title>
+        <!-- <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title> -->
 
         <!-- <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text> -->
 
@@ -30,6 +29,19 @@
           >
         </div>
 
+        <v-container>
+          <v-card class="playerDashboard">
+            <v-layout row wrap>
+              <v-flex xs6>
+                <hp-mp></hp-mp>
+              </v-flex>
+              <v-flex xs6>
+                <exp></exp>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </v-container>
+
         <v-card-actions>
           <v-spacer></v-spacer>
           <!-- <v-btn color="primary" flat @click="dialog = false">I accept</v-btn> -->
@@ -41,8 +53,14 @@
 
 <script>
 import orpheus from "@/assets/images/orpheus_idle.png";
+import HpMp from "@/components/UI/HpMp.vue";
+import Exp from "@/components/UI/Exp.vue";
 export default {
   name: "enemyEncounter",
+  components: {
+    HpMp,
+    Exp
+  },
   data() {
     return {
       dialog: true,
@@ -75,17 +93,25 @@ export default {
   position: absolute;
   right: 50px;
   top: 100px;
+  height: 15%;
 }
 
 .avatarThree {
   position: absolute;
   right: 50px;
   top: 200px;
+  height: 15%;
 }
 
 .avatarFour {
   position: absolute;
   right: 50px;
   top: 300px;
+  height: 15%;
+}
+
+.playerDashboard {
+  position: absolute;
+  top: 467px;
 }
 </style>
