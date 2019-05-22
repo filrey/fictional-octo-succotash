@@ -9,22 +9,22 @@
         <div>
           <img
             class="avatarOne"
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            src="@/assets/images/orpheus.png"
             alt="avatar"
           >
           <img
             class="avatarTwo"
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            src="@/assets/images/enemy6.png"
             alt="avatar"
           >
           <img
             class="avatarThree"
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            src="@/assets/images/enemy1.png"
             alt="avatar"
           >
           <img
             class="avatarFour"
-            src="https://vuetifyjs.com/apple-touch-icon-180x180.png"
+            src="@/assets/images/enemy1.png"
             alt="avatar"
           >
         </div>
@@ -88,27 +88,28 @@ export default {
   position: absolute;
   left: 50px;
   top: 200px;
+  height: 110px;
 }
 
 .avatarTwo {
   position: absolute;
   right: 50px;
   top: 100px;
-  height: 15%;
+  height: 110px;
 }
 
 .avatarThree {
   position: absolute;
   right: 50px;
   top: 200px;
-  height: 15%;
+  height: 110px;
 }
 
 .avatarFour {
   position: absolute;
   right: 50px;
   top: 300px;
-  height: 15%;
+  height: 110px;
 }
 
 .playerDashboard {
