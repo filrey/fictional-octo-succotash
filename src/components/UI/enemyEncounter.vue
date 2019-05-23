@@ -69,6 +69,14 @@ import flute1 from '@/assets/sounds/flute1.mp3'
 import flute2 from '@/assets/sounds/flute2.mp3'
 import step from '@/assets/sounds/Step.mp3'
 import dragon from '@/assets/sounds/dragon.mp3'
+import ExplosionL from '@/assets/sounds/Explosion1.mp3'
+import ExplosionM from '@/assets/sounds/Explosion6.mp3'
+import ExplosionH from '@/assets/sounds/Explosion2.mp3'
+import UIButton from '@/assets/sounds/UI_Quirky21.mp3'
+import heal from '@/assets/sounds/UI_Quirky1.mp3'
+import victory from '@/assets/sounds/SynthChime5.mp3'
+import defeat from '@/assets/sounds/Bells9.mp3'
+
 //Music
 import forestBattle from '@/assets/music/Fantasy-Forest-Battle.mp3'
 
@@ -128,7 +136,7 @@ export default {
       this.emitSnackbar('center_focus_strong',' The Monster has Been Defeated!')
       this.$parent.closeDialog()
       this.enemyHp = 100
-      this.playSound(flute2)
+      this.playSound(victory)
     },
     endBattle_defeat() {
       this.stopMusic()
@@ -136,7 +144,7 @@ export default {
       this.$parent.closeDialog()
       this.enemyHp = 100
       this.$store.state.player.hp = 20
-      this.playSound(flute1)
+      this.playSound(defeat)
     },
     endBattle_escape() {
       this.stopMusic()
@@ -167,14 +175,17 @@ export default {
       var chance_fire = fire[Math.floor(Math.random() * fire.length)];
        switch(chance_fire) {
         case "Fire":
+        this.playSound(ExplosionL)
           this.text = "You casted Fire!";
           this.playerAction_Attack(4, false);
           break;
         case "Fira":
+        this.playSound(ExplosionM)
           this.text = "You casted Fira!";
           this.playerAction_Attack(8, false);
           break;
         case "Firaga":
+        this.playSound(ExplosionH)
           this.text = "You casted Firaga!";
           this.playerAction_Attack(16, false);
           break;
@@ -207,14 +218,17 @@ export default {
       var chance_other = other[Math.floor(Math.random() * other.length)];
       switch(chance_other) {
         case "Meteor":
+        this.playSound(ExplosionH)
           this.text = "You casted Thunder!";
           this.playerAction_Attack(10, false);
           break;
         case "Bio":
+        this.playSound(ExplosionH)
           this.text = "You casted Bio!";
           this.playerAction_Attack(8, false);
           break;
         case "Ultima":
+        this.playSound(ExplosionH)
           this.text = "You casted Ultima!";
           this.playerAction_Attack(20, false);
           break;
