@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="dialog" width="80%">
-      <v-card class="gridBG encounterBoxHeight">
+      <v-card class="gridB encounterBoxHeight">
         <!-- <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title> -->
 
         <!-- <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text> -->
@@ -19,6 +19,7 @@
                 <player-actions
                   @playerAction_Attack="playerAction_Attack"
                   @playerAction_Escape="playerAction_Escape"
+                  @playerAction_Magic="playerAction_Magic"
                 ></player-actions>
               </v-flex>
               <v-flex xs3>
@@ -66,18 +67,47 @@ export default {
   },
   methods: {
     playerAction_Attack() {
-      // alert("player attack!");
-      this.enemyHp-=10;
+      if (this.isEncounterActive && this.enemyHp > 0) {
+        var enemy_attack = Math.random() >= 0.5;
+        var enemy_damage = Math.floor(Math.random() * 10);
+        var damage = Math.floor(Math.random() * 16);
+        this.enemyHp-=damage;
+        // determine if enemy attack hits
+        if (enemy_attack) {
+          this.$store.state.player.hp -= enemy_damage;
+        }
+        // check if hp is removed after battle
+        if (this.enemyHp < 0) {
+          this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
+          this.dialog = false;
+          this.$emit('update:isEncounterActive', false);
+        }
+      }
+      else {
+        this.dialog = false;
+        this.$emit('update:isEncounterActive', false);
+      }
     },
     playerAction_Escape() {
-      alert("player escape!");
+     this.dialog = false;
+     this.$emit('update:isEncounterActive', false);
+    },
+    playerAction_Magic() {
+      var heal = Math.floor(Math.random() * 10);
+      this.$store.state.player.mp -= heal;
+      this.$store.state.player.hp -= heal;
+
+      if (this.$store.state.player.hp >= 100) {
+        this.$store.state.player.hp = 100;
+      }
+      this.playerAction_Attack();
     }
   }
 };
 </script>
 
 <style lang="css">
-.gridBG {
+.gridB {
   background-image: url("../../assets/images/environment_forestbackground.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -86,7 +116,7 @@ export default {
 }
 
 .encounterBoxHeight {
-  height: 600px;
+  height: 70vh;
 }
 
 .avatarOne {
@@ -118,7 +148,7 @@ export default {
 }
 
 .playerDashboard {
-  position: absolute;
-  top: 467px;
+  position:absolute;
+  top:485px;
 }
 </style>
