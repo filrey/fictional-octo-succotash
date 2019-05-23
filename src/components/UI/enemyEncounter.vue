@@ -19,6 +19,7 @@
                 <player-actions
                   @playerAction_Attack="playerAction_Attack"
                   @playerAction_Escape="playerAction_Escape"
+                  @playerAction_Magic="playerAction_Magic"
                 ></player-actions>
               </v-flex>
               <v-flex xs3>
@@ -89,6 +90,17 @@ export default {
     },
     playerAction_Escape() {
      this.dialog = false;
+     this.$emit('update:isEncounterActive', false);
+    },
+    playerAction_Magic() {
+      var heal = Math.floor(Math.random() * 10);
+      this.$store.state.player.mp -= heal;
+      this.$store.state.player.hp -= heal;
+
+      if (this.$store.state.player.hp >= 100) {
+        this.$store.state.player.hp = 100;
+      }
+      this.playerAction_Attack();
     }
   }
 };
@@ -104,7 +116,7 @@ export default {
 }
 
 .encounterBoxHeight {
-  height: 600px;
+  height: 70vh;
 }
 
 .avatarOne {
@@ -136,7 +148,7 @@ export default {
 }
 
 .playerDashboard {
-  position: absolute;
-  top: 467px;
+  position:absolute;
+  top:485px;
 }
 </style>
