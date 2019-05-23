@@ -63,12 +63,15 @@ import orpheus from "@/assets/images/orpheus_idle.png";
 import HpMp from "@/components/UI/HpMp.vue";
 import Exp from "@/components/UI/Exp.vue";
 import playerActions from "@/components/UI/playerActions.vue";
+import howl from '@/assets/sounds/howl.mp3'
+
 export default {
   name: "enemyEncounter",
   components: {
     HpMp,
     Exp,
-    playerActions
+    playerActions,
+    howl
   },
   props: ["isEncounterActive"],
   data() {
@@ -81,10 +84,19 @@ export default {
       x: null,
       mode: "",
       timeout: 4000,
-      text: "Orpheus Attacks!"
+      text: "Orpheus Attacks!",
+      music: howl
     };
   },
   methods: {
+    play() {
+      //console.log('playing')
+      this.music.play();     
+    },
+    created() {
+      this.audio = document.getElementById('audio');
+    },
+  
     playerAction_Attack() {
       this.snackbar = true;
       if (this.isEncounterActive && this.enemyHp > 0) {
@@ -101,6 +113,7 @@ export default {
           this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
           this.dialog = false;
           this.$emit("update:isEncounterActive", false);
+          this.music.play();
         }
       } else {
         this.dialog = false;

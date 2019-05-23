@@ -14,6 +14,7 @@ export default {
     components: {
       MapGrid,
       Drawer,
+      oldcrypt
     },
     data () {
       return {
@@ -31,7 +32,7 @@ export default {
       bgMusic.addEventListener('ended', function() {
           this.currentTime = 0;
           this.play();
-      }, false);
+        }, false);
       //Play background music on page load
 
         bgMusic.play()
