@@ -72,20 +72,21 @@ export default {
     },
     indexMatchY() {
       return this.encounterLocations.enemyYLocation.indexOf(this.currentY)
-    },
-    hasCurrentIndexEncountered() {
-      return this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX]
     }
   },
   created() {
     this.populateEncounterLocations();
   },
   methods: {
+    markCurrentIndexEncounter(){
+      this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX] = true
+    },
     closeDialog(){
       this.isEncounterActive = false
     },
     checkForEncounter() {
-      if (this.indexMatchX == this.indexMatchY && !this.hasCurrentIndexEncountered) {
+      if (this.indexMatchX == this.indexMatchY && !this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX]) {
+        this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX] = true
         this.isEncounterActive = true
       }
     },

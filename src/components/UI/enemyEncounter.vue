@@ -97,10 +97,13 @@ export default {
     endBattle_victory() {
       this.emitSnackbar('center_focus_strong','The Monster has Been Defeated!')
       this.$parent.closeDialog()
+      this.enemyHp = 100
     },
     endBattle_defeat() {
       this.emitSnackbar('center_focus_strong','You have been Defeated!')
       this.$parent.closeDialog()
+      this.enemyHp = 100
+      this.$store.state.player.hp = 20
     },
     enemyAction_Attack() {
       var enemy_attack = Math.random() >= 0.5;
