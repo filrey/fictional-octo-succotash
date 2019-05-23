@@ -15,14 +15,18 @@
         <v-container>
           <v-card class="playerDashboard">
             <v-layout row wrap>
-              <v-flex xs4>
+              <v-flex xs3>
                 <player-actions></player-actions>
               </v-flex>
-              <v-flex xs4>
+              <v-flex xs3>
                 <hp-mp></hp-mp>
               </v-flex>
-              <v-flex xs4>
+              <v-flex xs3>
                 <exp></exp>
+              </v-flex>
+              <v-flex xs3>
+                Enemy: {{enemyHp}}
+                <v-progress-linear v-model="enemyHp" color="red" height="25"></v-progress-linear>
               </v-flex>
             </v-layout>
           </v-card>
@@ -54,9 +58,7 @@ export default {
     return {
       dialog: this.isEncounterActive,
       orpheus: orpheus,
-      enemyOneHp: 100,
-      enemyTwoHp: 100,
-      enemyThreeHp: 100
+      enemyHp: 100
     };
   }
 };
