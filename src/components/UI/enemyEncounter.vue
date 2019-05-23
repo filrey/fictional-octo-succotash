@@ -30,7 +30,7 @@
             <v-layout row wrap>
               <v-flex xs3>
                 <player-actions
-                  @playerAction_Attack="playerAction_Attack"
+                  @playerAction_Attack="playerAction_Attack(0, true)"
                   @playerAction_Escape="playerAction_Escape"
                   @playerAction_Magic="playerAction_Magic"
                 ></player-actions>
@@ -80,51 +80,153 @@ export default {
       y: "top",
       x: null,
       mode: "",
-      timeout: 4000,
+      timeout: 6000,
       text: "Orpheus Attacks!"
     };
   },
   methods: {
-    playerAction_Attack() {
-      this.snackbar = true;
-      if (this.isEncounterActive && this.enemyHp > 0) {
-        var enemy_attack = Math.random() >= 0.5;
-        var enemy_damage = Math.floor(Math.random() * 10);
-        var damage = Math.floor(Math.random() * 16);
-        this.enemyHp -= damage;
-        // determine if enemy attack hits
-        if (enemy_attack) {
-          this.$store.state.player.hp -= enemy_damage;
+    enemyAction_Attack() {
+      var enemy_attack = Math.random() >= 0.5;
+      var enemy_damage = Math.floor(Math.random() * 16);
+      if (enemy_attack) {
+        if (enemy_damage > 10){
+          this.y = "bottom";
+          this.text = "You've been critically wounded!"
         }
-        // check if hp is removed after battle
-        if (this.enemyHp < 0) {
+        this.$store.state.player.hp -= enemy_damage;
+        if (this.enemyHp < 0 || this.$store.state.player.hp < 0) {
           this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
           this.dialog = false;
           this.$emit("update:isEncounterActive", false);
         }
+      }
+    },
+    cast_fire() {
+      this.snackbar = true;
+      this.y = "top";
+      var fire = ['Fire', 'Fira', 'Firaga'];
+      var chance_fire = fire[Math.floor(Math.random() * fire.length)];
+       switch(chance_fire) {
+        case "Fire":
+          this.text = "You casted Fire!";
+          this.playerAction_Attack(4, false);
+          break;
+        case "Fira":
+          this.text = "You casted Fira!";
+          this.playerAction_Attack(8, false);
+        case "Firaga":
+          this.text = "You casted Firaga!";
+          this.playerAction_Attack(16, false);
+      }
+    },
+    cast_thunder() {
+      this.snackbar = true;
+      this.y = "top";
+      var thunder = ['Thunder', 'Thundara', 'Thundaga'];
+      var chance_thunder = thunder[Math.floor(Math.random() * thunder.length)];
+      switch(chance_thunder) {
+        case "Thunder":
+          this.text = "You casted Thunder!";
+          this.playerAction_Attack(4,false);
+          break;
+        case "Fira":
+          this.text = "You casted Thundara!";
+          this.playerAction_Attack(8, false);
+        case "Firaga":
+          this.text = "You casted Thundaga!";
+          this.playerAction_Attack(16, false);
+      }
+    },
+    cast_other() {
+      this.snackbar = true;
+      this.y = "top";
+      var other = ['Meteor', 'Bio', 'Ultima'];
+      var chance_other = other[Math.floor(Math.random() * other.length)];
+      switch(chance_other) {
+        case "Meteor":
+          this.text = "You casted Thunder!";
+          this.playerAction_Attack(10, false);
+          break;
+        case "Bio":
+          this.text = "You casted Bio!";
+          this.playerAction_Attack(8, false);
+        case "Ultima":
+          this.text = "You casted Ultima!";
+          this.playerAction_Attack(20, false);
+      }
+    },
+    spell_or_attack(active) {
+      if (active) {
+        var attacks = ['Fire', 'Thunder', 'Other'];
+        var chance_attack = attacks[Math.floor(Math.random() * attacks.length)];
+        switch(chance_attack) {
+          case "Fire":
+            this.cast_fire(4, false);
+            break;
+          case "Thunder":
+            this.cast_thunder(8, false);
+            break;
+          case "Other":
+            this.cast_other(16, false);
+            break;
+        }
+      }
+    },
+    playerAction_Attack(bonus, active) {
+      this.snackbar = true;
+      this.spell_or_attack(active);
+      bonus = 0;
+      if (this.isEncounterActive && this.enemyHp > 0 && this.$store.state.player.hp > 0) {
+        var damage = Math.floor(Math.random() * 16);
+        this.enemyHp -= damage + bonus;
+        this.enemyAction_Attack();
       } else {
         this.dialog = false;
         this.$emit("update:isEncounterActive", false);
       }
     },
     playerAction_Escape() {
-      this.dialog = false;
-      this.$emit("update:isEncounterActive", false);
+      this.snackbar = true;
+      var escape = Math.random() >= 0.5;
+      if (escape) {
+        this.y = "top";
+        this.text = "You have successfully escaped!!!"
+        this.dialog = false;
+        this.$emit("update:isEncounterActive", false);
+      } else {
+        this.y = "bottom"
+        this.text = "You failed to escape!!"
+        this.enemyAction_Attack();
+      }
     },
     playerAction_Magic() {
+      this.snackbar = true;
+      this.y = "top";
       if (this.$store.state.player.mp > 0) {
+        var healing_spells = ['Nothing', 'Cure', 'Cura', 'Curaga'];
+        var chance_spell = healing_spells[Math.floor(Math.random() * healing_spells.length)];
         var heal = Math.floor(Math.random() * 10);
-        this.$store.state.player.mp -= heal;
-        this.$store.state.player.hp += heal;
-
-        if (this.$store.state.player.hp >= 100) {
-          this.$store.state.player.hp = 100;
+        switch(chance_spell) {
+          case "Nothing":
+            this.text = "SPELL FAILED!";
+            break;
+          case "Cure":
+            this.text = "You casted cure!";
+            this.$store.state.player.hp += heal + 4;
+            this.$store.state.player.mp -= heal + 4;
+            break;
+          case "Cura":
+            this.text = "You casted cura!";
+            this.$store.state.player.hp += heal + 8;
+            this.$store.state.player.mp -= heal + 8;
+          case "Curaga":
+            this.text = "You casted curaga!";
+            this.$store.state.player.hp += heal + 16;
+            this.$store.state.player.mp -= heal + 16;
         }
       }
-      var enemy_attack = Math.random() >= 0.5;
-      var enemy_damage = Math.floor(Math.random() * 10);
-      if (enemy_attack) {
-        this.$store.state.player.hp -= enemy_damage;
+      if (this.$store.state.player.hp >= 100) {
+        this.$store.state.player.hp = 100;
       }
     }
   },

@@ -7,6 +7,7 @@
 <script>
   import MapGrid from '@/components/UI/mapGrid.vue'
   import Drawer from '@/components/UI/drawer.vue'
+  import oldcrypt from '@/assets/music/oldcrypt.mp3'
 
 export default {
     name: 'Level-2',
@@ -19,8 +20,21 @@ export default {
         numOfEncounters: 10,
         gridSizeX: 10,
         gridSizeY: 10,
-        isEncounterActive: true
+        isEncounterActive: true,
+        music: oldcrypt
       }
-    }
+    },
+
+    mounted() {
+      var bgMusic = new Audio(oldcrypt)
+      // This function loops the background music after it ends
+      bgMusic.addEventListener('ended', function() {
+          this.currentTime = 0;
+          this.play();
+      }, false);
+      //Play background music on page load
+
+        bgMusic.play()
+  },
 }
 </script>
