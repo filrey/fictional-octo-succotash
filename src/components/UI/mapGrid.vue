@@ -45,19 +45,19 @@ export default {
     var vm = this;
     window.addEventListener("keydown", function(event) {
       // If up arrow was pressed...
-      if (event.keyCode == 37 && vm.currentY != 1) {
+      if (event.keyCode == 37 && vm.currentY != 1 && !vm.isEncounterActive) {
         vm.currentY--;
         vm.checkForEncounter()
       }
-      if (event.keyCode == 38 && vm.currentX != 1) {
+      if (event.keyCode == 38 && vm.currentX != 1 && !vm.isEncounterActive) {
         vm.currentX--;
         vm.checkForEncounter()
       }
-      if (event.keyCode == 39 && vm.currentY != vm.columns) {
+      if (event.keyCode == 39 && vm.currentY != vm.columns && !vm.isEncounterActive) {
         vm.currentY++;
         vm.checkForEncounter()
       }
-      if (event.keyCode == 40 && vm.currentX != vm.rows) {
+      if (event.keyCode == 40 && vm.currentX != vm.rows && !vm.isEncounterActive) {
         vm.currentX++;
         vm.checkForEncounter()
       }

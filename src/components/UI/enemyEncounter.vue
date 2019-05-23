@@ -14,6 +14,11 @@
       <!-- <v-btn color="pink" flat @click="snackbar = false">Close</v-btn> -->
     </v-snackbar>
     <v-dialog v-model="this.toggleDialog" width="80%">
+      <v-dialog v-model="this.endEncounter" width="40%">
+        <v-card>
+          The battle is over! <v-btn @click="()=> this.$emit('chant')">Continue</v-btn>
+        </v-card>
+      </v-dialog>
       <v-card class="gridB encounterBoxHeight">
         <!-- <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title> -->
 
@@ -74,6 +79,7 @@ export default {
   data() {
     return {
       dialog: this.isEncounterActive,
+      endEncounter: true,
       orpheus: orpheus,
       enemyHp: 100,
       snackbar: false,
