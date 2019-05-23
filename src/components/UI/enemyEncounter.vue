@@ -41,7 +41,7 @@
               <v-flex xs3>
                 <exp></exp>
               </v-flex>
-              <v-flex xs3>
+              <v-flex xs3 style="padding:10px;">
                 Enemy: {{enemyHp}}
                 <v-progress-linear v-model="enemyHp" color="red" height="25"></v-progress-linear>
               </v-flex>
@@ -174,9 +174,9 @@ export default {
     },
     playerAction_Attack(bonus, active) {
       this.snackbar = true;
-      this.spell_or_attack(active);
       bonus = 0;
       if (this.isEncounterActive && this.enemyHp > 0 && this.$store.state.player.hp > 0) {
+        this.spell_or_attack(active);
         var damage = Math.floor(Math.random() * 16);
         this.enemyHp -= damage + bonus;
         this.enemyAction_Attack();
@@ -243,7 +243,7 @@ export default {
 }
 
 .encounterBoxHeight {
-  height: 70vh;
+  height: 650px;
 }
 
 .avatarOne {
