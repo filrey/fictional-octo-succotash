@@ -1,5 +1,18 @@
 <template>
   <div>
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="y === 'bottom'"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      <v-icon color="white">center_focus_strong</v-icon>{{text}}
+      <!-- <v-btn color="pink" flat @click="snackbar = false">Close</v-btn> -->
+    </v-snackbar>
     <v-dialog v-model="dialog" width="80%">
       <v-card class="gridB encounterBoxHeight">
         <!-- <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title> -->
@@ -62,16 +75,23 @@ export default {
     return {
       dialog: this.isEncounterActive,
       orpheus: orpheus,
-      enemyHp: 100
+      enemyHp: 100,
+      snackbar: false,
+      y: "top",
+      x: null,
+      mode: "",
+      timeout: 4000,
+      text: "Orpheus Attacks!"
     };
   },
   methods: {
     playerAction_Attack() {
+      this.snackbar = true;
       if (this.isEncounterActive && this.enemyHp > 0) {
         var enemy_attack = Math.random() >= 0.5;
         var enemy_damage = Math.floor(Math.random() * 10);
         var damage = Math.floor(Math.random() * 16);
-        this.enemyHp-=damage;
+        this.enemyHp -= damage;
         // determine if enemy attack hits
         if (enemy_attack) {
           this.$store.state.player.hp -= enemy_damage;
@@ -80,17 +100,16 @@ export default {
         if (this.enemyHp < 0) {
           this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
           this.dialog = false;
-          this.$emit('update:isEncounterActive', false);
+          this.$emit("update:isEncounterActive", false);
         }
-      }
-      else {
+      } else {
         this.dialog = false;
-        this.$emit('update:isEncounterActive', false);
+        this.$emit("update:isEncounterActive", false);
       }
     },
     playerAction_Escape() {
-     this.dialog = false;
-     this.$emit('update:isEncounterActive', false);
+      this.dialog = false;
+      this.$emit("update:isEncounterActive", false);
     },
     playerAction_Magic() {
       var heal = Math.floor(Math.random() * 10);
@@ -148,7 +167,7 @@ export default {
 }
 
 .playerDashboard {
-  position:absolute;
-  top:485px;
+  position: absolute;
+  top: 485px;
 }
 </style>
