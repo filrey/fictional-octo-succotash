@@ -2,7 +2,7 @@
     <div>
         EXP: {{exp}}
         <v-progress-linear v-model="exp" color="green" height="25"></v-progress-linear>
-        <v-btn color="green" flat @click="()=> this.$store.commit('randExp')">Random Exp</v-btn>
+        <v-btn color="blue" flat @click="()=> this.$store.commit('chant')">Chant</v-btn>
     </div>
 </template>
 <script>

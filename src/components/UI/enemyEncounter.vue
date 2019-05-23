@@ -112,14 +112,20 @@ export default {
       this.$emit("update:isEncounterActive", false);
     },
     playerAction_Magic() {
-      var heal = Math.floor(Math.random() * 10);
-      this.$store.state.player.mp -= heal;
-      this.$store.state.player.hp -= heal;
+      if (this.$store.state.player.mp > 0) {
+        var heal = Math.floor(Math.random() * 10);
+        this.$store.state.player.mp -= heal;
+        this.$store.state.player.hp += heal;
 
-      if (this.$store.state.player.hp >= 100) {
-        this.$store.state.player.hp = 100;
+        if (this.$store.state.player.hp >= 100) {
+          this.$store.state.player.hp = 100;
+        }
       }
-      this.playerAction_Attack();
+      var enemy_attack = Math.random() >= 0.5;
+      var enemy_damage = Math.floor(Math.random() * 10);
+      if (enemy_attack) {
+        this.$store.state.player.hp -= enemy_damage;
+      }
     }
   }
 };
