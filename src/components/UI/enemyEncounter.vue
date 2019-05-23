@@ -13,7 +13,7 @@
       <v-icon color="white">center_focus_strong</v-icon>{{text}}
       <!-- <v-btn color="pink" flat @click="snackbar = false">Close</v-btn> -->
     </v-snackbar>
-    <v-dialog v-model="dialog" width="80%">
+    <v-dialog v-model="this.toggleDialog" width="80%">
       <v-card class="gridB encounterBoxHeight">
         <!-- <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title> -->
 
@@ -229,7 +229,12 @@ export default {
         this.$store.state.player.hp = 100;
       }
     }
-  }
+  },
+  computed: {
+    toggleDialog(){
+      return this.isEncounterActive
+    }
+  },
 };
 </script>
 

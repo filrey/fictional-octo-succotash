@@ -10,7 +10,7 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <enemy-encounter :isEncounterActive="isEncounterActive"></enemy-encounter>
+      <enemy-encounter :isEncounterActive="this.isEncounterActive"></enemy-encounter>
     </v-container>
   </div>
 </template>
@@ -29,10 +29,11 @@ export default {
       orpheus: orpheus,
       currentX: 1,
       currentY: 1,
+      isCurrentCellEncounter: '',
       rows: this.gridSizeY,
       columns: this.gridSizeX,
       encounters: this.numOfEncounters,
-      isEncounterActive: true,
+      isEncounterActive: false,
       encounterLocations: {
         enemyXLocation: [],
         enemyYLocation: [],
@@ -46,27 +47,46 @@ export default {
       // If up arrow was pressed...
       if (event.keyCode == 37 && vm.currentY != 1) {
         vm.currentY--;
+        vm.checkForEncounter()
       }
       if (event.keyCode == 38 && vm.currentX != 1) {
         vm.currentX--;
+        vm.checkForEncounter()
       }
       if (event.keyCode == 39 && vm.currentY != vm.columns) {
         vm.currentY++;
+        vm.checkForEncounter()
       }
       if (event.keyCode == 40 && vm.currentX != vm.rows) {
         vm.currentX++;
+        vm.checkForEncounter()
       }
     });
   },
   computed: {
     numOfCells() {
       return this.rows * this.columns;
+    },
+    indexMatchX() {
+      return this.encounterLocations.enemyXLocation.indexOf(this.currentX)
+    },
+    indexMatchY() {
+      return this.encounterLocations.enemyYLocation.indexOf(this.currentY)
+    },
+    hasCurrentIndexEncountered() {
+      return this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX]
     }
   },
   created() {
     this.populateEncounterLocations();
   },
   methods: {
+    checkForEncounter() {
+      // console.log("check for encounter")
+      if (this.indexMatchX == this.indexMatchY && !this.hasCurrentIndexEncountered) {
+        this.isEncounterActive = true
+      }
+    },
     populateEncounterLocations() {
       this.encounterLocations.enemyXLocation = this.randomArrayNoRepeats(
         this.gridSizeX
@@ -74,6 +94,7 @@ export default {
       this.encounterLocations.enemyYLocation = this.randomArrayNoRepeats(
         this.gridSizeY
       );
+      this.encounterLocations.encounterAtIndexCompleted = this.falseArrayInit(this.gridSizeY);
     },
     randomArrayNoRepeats(arraySize) {
       for (var a = [], i = 0; i < arraySize; ++i) a[i] = i;
@@ -95,6 +116,13 @@ export default {
       a = shuffle(a);
       return a;
     },
+    falseArrayInit(arraySize) {
+      var a = new Array(arraySize);
+
+      for (var i = 0; i < a.length; ++i) { a[i] = false; }
+      
+      return a
+    }
   }
 };
 </script>
