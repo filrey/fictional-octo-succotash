@@ -10,15 +10,10 @@
       :top="y === 'top'"
       :vertical="mode === 'vertical'"
     >
-      <v-icon color="white">center_focus_strong</v-icon>{{text}}
-      <!-- <v-btn color="pink" flat @click="snackbar = false">Close</v-btn> -->
+      <v-icon color="white">{{snackIcon}}</v-icon>{{text}}
+      <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
-    <v-dialog v-model="this.toggleDialog" width="80%">
-      <v-dialog v-model="this.endEncounter" width="40%">
-        <v-card>
-          The battle is over! <v-btn @click="()=> this.$emit('chant')">Continue</v-btn>
-        </v-card>
-      </v-dialog>
+    <v-dialog persistent v-model="this.toggleDialog" width="80%">
       <v-card class="gridB encounterBoxHeight">
         <!-- <v-card-title class="headline grey lighten-2" primary-title>Enemy Encounter</v-card-title> -->
 
@@ -82,7 +77,6 @@ export default {
   data() {
     return {
       dialog: this.isEncounterActive,
-      endEncounter: true,
       orpheus: orpheus,
       enemyHp: 100,
       snackbar: false,
@@ -90,10 +84,24 @@ export default {
       x: null,
       mode: "",
       timeout: 6000,
-      text: "Orpheus Attacks!"
+      text: "Orpheus Attacks!",
+      snackIcon: ''
     };
   },
   methods: {
+    emitSnackbar(icon,snackText){
+      this.snackbar = true
+      this.text = snackText
+      this.snackIcon = icon
+    },
+    endBattle_victory() {
+      this.emitSnackbar('center_focus_strong','The Monster has Been Defeated!')
+      this.$parent.closeDialog()
+    },
+    endBattle_defeat() {
+      this.emitSnackbar('center_focus_strong','You have been Defeated!')
+      this.$parent.closeDialog()
+    },
     enemyAction_Attack() {
       var enemy_attack = Math.random() >= 0.5;
       var enemy_damage = Math.floor(Math.random() * 16);
@@ -105,9 +113,8 @@ export default {
         this.$store.state.player.hp -= enemy_damage;
         if (this.enemyHp < 0 || this.$store.state.player.hp < 0) {
           this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
-          this.dialog = false;
-          this.$emit("update:isEncounterActive", false);
-          this.music.play();
+          this.endBattle_defeat()
+          // this.music.play();
         }
       }
     },
@@ -197,8 +204,7 @@ export default {
         this.enemyHp -= damage + bonus;
         this.enemyAction_Attack();
       } else {
-        this.dialog = false;
-        this.$emit("update:isEncounterActive", false);
+        this.endBattle_victory()
       }
     },
     playerAction_Escape() {

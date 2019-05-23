@@ -81,8 +81,10 @@ export default {
     this.populateEncounterLocations();
   },
   methods: {
+    closeDialog(){
+      this.isEncounterActive = false
+    },
     checkForEncounter() {
-      // console.log("check for encounter")
       if (this.indexMatchX == this.indexMatchY && !this.hasCurrentIndexEncountered) {
         this.isEncounterActive = true
       }
