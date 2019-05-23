@@ -22,14 +22,28 @@ export default new Vuex.Store({
   mutations: {
     //SKILLS
     levelUpSkill(state) {
-      // NEED TO DO - allow level ups based on skill 
+      // NEED TO DO - allow level ups based on skill
       state.skills.fire.level++;
     },
-    //EXP
-    randExp(state){
-      state.player.exp = Math.floor(Math.random() * 100); 
+    // increase MP
+    chant(state){
+      var success = Math.random() >= 0.5;
+      if (success) {
+        var mp = Math.floor(Math.random() * 10) + 10;
+        state.player.mp += mp;
+      }
+      if (state.player.mp > 100) state.player.mp = 100;
+      // enemy
+      var enemy_attack = Math.random() >= 0.5;
+      var enemy_damage = Math.floor(Math.random() * 10);
+      var damage = Math.floor(Math.random() * 16);
+      var damage_bonus = Math.floor(Math.random() * 8);
+      this.enemyHp-=damage;
+      // determine if enemy attack hits
+      if (enemy_attack) {
+        state.player.hp -= enemy_damage + damage_bonus;
+      }
     }
-
   },
   actions: {
 
