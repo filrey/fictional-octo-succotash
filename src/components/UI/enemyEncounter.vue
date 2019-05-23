@@ -16,7 +16,10 @@
           <v-card class="playerDashboard">
             <v-layout row wrap>
               <v-flex xs3>
-                <player-actions></player-actions>
+                <player-actions
+                  @playerAction_Attack="playerAction_Attack"
+                  @playerAction_Escape="playerAction_Escape"
+                ></player-actions>
               </v-flex>
               <v-flex xs3>
                 <hp-mp></hp-mp>
@@ -60,6 +63,15 @@ export default {
       orpheus: orpheus,
       enemyHp: 100
     };
+  },
+  methods: {
+    playerAction_Attack() {
+      // alert("player attack!");
+      this.enemyHp-=10;
+    },
+    playerAction_Escape() {
+      alert("player escape!");
+    }
   }
 };
 </script>

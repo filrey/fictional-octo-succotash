@@ -8,7 +8,7 @@
           </v-list-tile-action>
 
           <v-list-tile-content>
-            <v-btn @click outline color="indigo">Attack</v-btn>
+            <v-btn @click="()=> this.$emit('playerAction_Attack')" outline color="indigo">Attack</v-btn>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile>
@@ -17,7 +17,7 @@
           </v-list-tile-action>
 
           <v-list-tile-content>
-            <v-btn @click outline color="indigo">Escape</v-btn>
+            <v-btn @click="()=> this.$emit('playerAction_Escape')" outline color="indigo">Escape</v-btn>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
