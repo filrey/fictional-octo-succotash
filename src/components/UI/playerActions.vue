@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-navigation-drawer floating permanent stateless value="true">
       <v-list dense>
         <v-list-tile>
           <v-list-tile-action>
@@ -30,7 +29,6 @@
         </v-list-tile>
 
       </v-list>
-    </v-navigation-drawer>
   </div>
 </template>
 
