@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 10px;">
     <v-progress-circular :rotate="360" :size="100" :width="15" :value="hp" color="red">HP: {{hp}}</v-progress-circular>
     <v-progress-circular :rotate="360" :size="100" :width="15" :value="mp" color="blue">MP: {{mp}}</v-progress-circular>
   </div>

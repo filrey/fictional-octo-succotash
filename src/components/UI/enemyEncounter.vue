@@ -46,7 +46,7 @@
               <v-flex xs3>
                 <exp></exp>
               </v-flex>
-              <v-flex xs3>
+              <v-flex xs3 style="padding:10px;">
                 Enemy: {{enemyHp}}
                 <v-progress-linear v-model="enemyHp" color="red" height="25"></v-progress-linear>
               </v-flex>
@@ -68,12 +68,15 @@ import orpheus from "@/assets/images/orpheus_idle.png";
 import HpMp from "@/components/UI/HpMp.vue";
 import Exp from "@/components/UI/Exp.vue";
 import playerActions from "@/components/UI/playerActions.vue";
+import howl from '@/assets/sounds/howl.mp3'
+
 export default {
   name: "enemyEncounter",
   components: {
     HpMp,
     Exp,
-    playerActions
+    playerActions,
+    howl
   },
   props: ["isEncounterActive"],
   data() {
@@ -104,6 +107,7 @@ export default {
           this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
           this.dialog = false;
           this.$emit("update:isEncounterActive", false);
+          this.music.play();
         }
       }
     },
@@ -180,9 +184,9 @@ export default {
     },
     playerAction_Attack(bonus, active) {
       this.snackbar = true;
-      this.spell_or_attack(active);
       bonus = 0;
       if (this.isEncounterActive && this.enemyHp > 0 && this.$store.state.player.hp > 0) {
+        this.spell_or_attack(active);
         var damage = Math.floor(Math.random() * 16);
         this.enemyHp -= damage + bonus;
         this.enemyAction_Attack();
@@ -254,7 +258,7 @@ export default {
 }
 
 .encounterBoxHeight {
-  height: 70vh;
+  height: 650px;
 }
 
 .avatarOne {
