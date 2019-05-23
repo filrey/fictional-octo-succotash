@@ -70,7 +70,7 @@ export default {
       this.enemyHp-=10;
     },
     playerAction_Escape() {
-      alert("player escape!");
+     this.dialog = false;
     }
   }
 };
