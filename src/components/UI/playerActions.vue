@@ -12,7 +12,7 @@
 
         <v-list-tile>
           <v-list-tile-action>
-            <v-icon>input</v-icon>
+            <v-icon>local_hospital</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-btn @click="()=> this.$emit('playerAction_Magic')" outline color="indigo">Heal</v-btn>

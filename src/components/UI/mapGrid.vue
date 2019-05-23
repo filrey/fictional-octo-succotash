@@ -10,7 +10,7 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <enemy-encounter :isEncounterActive="this.isEncounterActive"></enemy-encounter>
+      <enemy-encounter :isEncounterActive="this.isEncounterActive" :startEncounter="this.startEncounter"></enemy-encounter>
     </v-container>
   </div>
 </template>
@@ -18,6 +18,9 @@
 <script>
 import orpheus from "@/assets/images/orpheus_idle.png";
 import enemyEncounter from "@/components/UI/enemyEncounter.vue";
+import step from '@/assets/sounds/Step.mp3'
+import NetherPlace from "@/assets/music/Netherplace_Looping.mp3";
+
 export default {
   name: "MapGrid",
   props: ["numOfEncounters","gridSizeX","gridSizeY"],
@@ -34,6 +37,8 @@ export default {
       columns: this.gridSizeX,
       encounters: this.numOfEncounters,
       isEncounterActive: false,
+      bgMusic: '',
+      startEncounter: false,
       encounterLocations: {
         enemyXLocation: [],
         enemyYLocation: [],
@@ -43,22 +48,28 @@ export default {
   },
   mounted: function() {
     var vm = this;
+    this.bgMusic = new Audio(NetherPlace);
+    this.bgMusic.play();
     window.addEventListener("keydown", function(event) {
       // If up arrow was pressed...
       if (event.keyCode == 37 && vm.currentY != 1 && !vm.isEncounterActive) {
         vm.currentY--;
+        vm.playSound(step)
         vm.checkForEncounter()
       }
       if (event.keyCode == 38 && vm.currentX != 1 && !vm.isEncounterActive) {
         vm.currentX--;
+        vm.playSound(step)
         vm.checkForEncounter()
       }
       if (event.keyCode == 39 && vm.currentY != vm.columns && !vm.isEncounterActive) {
         vm.currentY++;
+        vm.playSound(step)
         vm.checkForEncounter()
       }
       if (event.keyCode == 40 && vm.currentX != vm.rows && !vm.isEncounterActive) {
         vm.currentX++;
+        vm.playSound(step)
         vm.checkForEncounter()
       }
     });
@@ -78,16 +89,32 @@ export default {
     this.populateEncounterLocations();
   },
   methods: {
+    stopMusic() {
+      this.bgMusic.pause()
+      this.bgMusic.currentTime = 0;
+    },
+    playMusic() {
+      this.bgMusic.play()
+    },
+    playSound(sound) {
+      if(sound) {
+        var audio = new Audio(sound)
+        audio.play()
+      }
+    },
     markCurrentIndexEncounter(){
       this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX] = true
     },
     closeDialog(){
+      this.playMusic()
       this.isEncounterActive = false
     },
     checkForEncounter() {
       if (this.indexMatchX == this.indexMatchY && !this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX]) {
         this.encounterLocations.encounterAtIndexCompleted[this.indexMatchX] = true
+        this.stopMusic()
         this.isEncounterActive = true
+        this.startEncounter = !this.startEncounter
       }
     },
     populateEncounterLocations() {

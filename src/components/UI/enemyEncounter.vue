@@ -63,7 +63,16 @@ import orpheus from "@/assets/images/orpheus_idle.png";
 import HpMp from "@/components/UI/HpMp.vue";
 import Exp from "@/components/UI/Exp.vue";
 import playerActions from "@/components/UI/playerActions.vue";
-// import howl from '@/assets/sounds/howl.mp3'
+//Sounds
+import howl from '@/assets/sounds/howl.mp3'
+import flute1 from '@/assets/sounds/flute1.mp3'
+import flute2 from '@/assets/sounds/flute2.mp3'
+import step from '@/assets/sounds/Step.mp3'
+import dragon from '@/assets/sounds/dragon.mp3'
+//Music
+import forestBattle from '@/assets/music/Fantasy-Forest-Battle.mp3'
+
+
 
 export default {
   name: "enemyEncounter",
@@ -71,15 +80,18 @@ export default {
     HpMp,
     Exp,
     playerActions,
-    // howl
+    howl
   },
-  props: ["isEncounterActive"],
+  props: ["isEncounterActive","startEncounter"],
   data() {
     return {
+      startEncounter: this.startEncounter,
       dialog: this.isEncounterActive,
       orpheus: orpheus,
       enemyHp: 100,
+      //SnackBar Properties
       snackbar: false,
+      bgMusic: '',
       y: "top",
       x: null,
       mode: "",
@@ -88,23 +100,51 @@ export default {
       snackIcon: ''
     };
   },
+  mounted() {
+    this.bgMusic = new Audio(forestBattle)
+    // this.bgMusic.play()
+  },
   methods: {
+    stopMusic() {
+      this.bgMusic.pause()
+      this.bgMusic.currentTime = 0;
+    },
+    playMusic() {
+      this.bgMusic.play()
+    },
+    playSound(sound) {
+      if(sound) {
+        var audio = new Audio(sound)
+        audio.play()
+      }
+    },
     emitSnackbar(icon,snackText){
       this.snackbar = true
       this.text = snackText
       this.snackIcon = icon
     },
     endBattle_victory() {
-      this.emitSnackbar('center_focus_strong','The Monster has Been Defeated!')
+      this.stopMusic()
+      this.emitSnackbar('center_focus_strong',' The Monster has Been Defeated!')
       this.$parent.closeDialog()
       this.enemyHp = 100
+      this.playSound(flute2)
     },
     endBattle_defeat() {
-      this.emitSnackbar('center_focus_strong','You have been Defeated!')
+      this.stopMusic()
+      this.emitSnackbar('center_focus_strong',' You have been Defeated!')
       this.$parent.closeDialog()
       this.enemyHp = 100
       this.$store.state.player.hp = 20
+      this.playSound(flute1)
     },
+    endBattle_escape() {
+      this.stopMusic()
+      this.emitSnackbar('center_focus_strong',' You have successfully escaped!!!')
+      this.$parent.closeDialog()
+      this.enemyHp = 100
+      this.playSound(step)
+    },    
     enemyAction_Attack() {
       var enemy_attack = Math.random() >= 0.5;
       var enemy_damage = Math.floor(Math.random() * 16);
@@ -117,7 +157,6 @@ export default {
         if (this.enemyHp < 0 || this.$store.state.player.hp < 0) {
           this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
           this.endBattle_defeat()
-          // this.music.play();
         }
       }
     },
@@ -215,9 +254,7 @@ export default {
       var escape = Math.random() >= 0.5;
       if (escape) {
         this.y = "top";
-        this.text = "You have successfully escaped!!!"
-        this.dialog = false;
-        this.$emit("update:isEncounterActive", false);
+        this.endBattle_escape()
       } else {
         this.y = "bottom"
         this.text = "You failed to escape!!"
@@ -260,6 +297,13 @@ export default {
   computed: {
     toggleDialog(){
       return this.isEncounterActive
+    }
+  },
+  watch: {
+    startEncounter : function () {
+      this.playSound(dragon)
+      this.bgMusic.play()
+      this.emitSnackbar('center_focus_strong','A Monster Approaches...')
     }
   },
 };
@@ -308,6 +352,6 @@ export default {
 
 .playerDashboard {
   position: absolute;
-  top: 485px;
+  top: 497px;
 }
 </style>
