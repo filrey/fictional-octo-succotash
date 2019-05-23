@@ -68,7 +68,7 @@ import orpheus from "@/assets/images/orpheus_idle.png";
 import HpMp from "@/components/UI/HpMp.vue";
 import Exp from "@/components/UI/Exp.vue";
 import playerActions from "@/components/UI/playerActions.vue";
-import howl from '@/assets/sounds/howl.mp3'
+// import howl from '@/assets/sounds/howl.mp3'
 
 export default {
   name: "enemyEncounter",
@@ -76,7 +76,7 @@ export default {
     HpMp,
     Exp,
     playerActions,
-    howl
+    // howl
   },
   props: ["isEncounterActive"],
   data() {
@@ -124,9 +124,11 @@ export default {
         case "Fira":
           this.text = "You casted Fira!";
           this.playerAction_Attack(8, false);
+          break;
         case "Firaga":
           this.text = "You casted Firaga!";
           this.playerAction_Attack(16, false);
+          break;
       }
     },
     cast_thunder() {
@@ -142,9 +144,11 @@ export default {
         case "Fira":
           this.text = "You casted Thundara!";
           this.playerAction_Attack(8, false);
+          break;
         case "Firaga":
           this.text = "You casted Thundaga!";
           this.playerAction_Attack(16, false);
+          break;
       }
     },
     cast_other() {
@@ -160,9 +164,11 @@ export default {
         case "Bio":
           this.text = "You casted Bio!";
           this.playerAction_Attack(8, false);
+          break;
         case "Ultima":
           this.text = "You casted Ultima!";
           this.playerAction_Attack(20, false);
+          break;
       }
     },
     spell_or_attack(active) {
@@ -229,10 +235,12 @@ export default {
             this.text = "You casted cura!";
             this.$store.state.player.hp += heal + 8;
             this.$store.state.player.mp -= heal + 8;
+            break;
           case "Curaga":
             this.text = "You casted curaga!";
             this.$store.state.player.hp += heal + 16;
             this.$store.state.player.mp -= heal + 16;
+            break;
         }
       }
       if (this.$store.state.player.hp >= 100) {

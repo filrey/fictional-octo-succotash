@@ -7,14 +7,14 @@
 <script>
   import MapGrid from '@/components/UI/mapGrid.vue'
   import Drawer from '@/components/UI/drawer.vue'
-  import oldcrypt from '@/assets/music/oldcrypt.mp3'
+  // import oldcrypt from '@/assets/music/oldcrypt.mp3'
 
 export default {
     name: 'Level-2',
     components: {
       MapGrid,
       Drawer,
-      oldcrypt
+      // oldcrypt
     },
     data () {
       return {
@@ -22,20 +22,20 @@ export default {
         gridSizeX: 10,
         gridSizeY: 10,
         isEncounterActive: true,
-        music: oldcrypt
+        // music: oldcrypt
       }
     },
 
-    mounted() {
-      var bgMusic = new Audio(oldcrypt)
-      // This function loops the background music after it ends
-      bgMusic.addEventListener('ended', function() {
-          this.currentTime = 0;
-          this.play();
-        }, false);
-      //Play background music on page load
+  //   mounted() {
+  //     var bgMusic = new Audio(oldcrypt)
+  //     // This function loops the background music after it ends
+  //     bgMusic.addEventListener('ended', function() {
+  //         this.currentTime = 0;
+  //         this.play();
+  //       }, false);
+  //     //Play background music on page load
 
-        bgMusic.play()
-  },
+  //       bgMusic.play()
+  // },
 }
 </script>
