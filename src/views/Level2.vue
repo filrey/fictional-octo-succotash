@@ -18,7 +18,7 @@ export default {
       return {
         numOfEncounters: 10,
         gridSizeX: 10,
-        gridSizeY: 9,
+        gridSizeY: 10,
         isEncounterActive: true
       }
     }

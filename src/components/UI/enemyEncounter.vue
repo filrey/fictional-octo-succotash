@@ -127,7 +127,7 @@ export default {
         this.$store.state.player.hp -= enemy_damage;
       }
     }
-  }
+  },
 };
 </script>
 
