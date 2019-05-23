@@ -14,7 +14,7 @@
           >
           <img
             class="avatarTwo"
-            src="@/assets/images/enemy6.png"
+            src="@/assets/images/enemy12.png"
             alt="avatar"
           >
           <img
