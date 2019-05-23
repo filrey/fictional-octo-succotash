@@ -100,7 +100,7 @@ export default {
 
 <style lang="css">
 .gridBG {
-  background-image: url("../../assets/images/environment_forestbackground.png");
+  background-image: url("../../assets/images/map2.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
