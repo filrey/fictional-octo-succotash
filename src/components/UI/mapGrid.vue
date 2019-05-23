@@ -35,7 +35,8 @@ export default {
       isEncounterActive: true,
       encounterLocations: {
         enemyXLocation: [],
-        enemyYLocation: []
+        enemyYLocation: [],
+        encounterAtIndexCompleted: []
       }
     };
   },
@@ -93,7 +94,7 @@ export default {
 
       a = shuffle(a);
       return a;
-    }
+    },
   }
 };
 </script>
