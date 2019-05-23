@@ -32,7 +32,7 @@
           <v-card class="opacity50" width="150vh">
             <v-card-title primary-title ><v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon><h1>Fictional-Octo-Succotash</h1></v-card-title>
               <v-card-actions>
-                <router-link to="/Level1"><v-btn color="green">Play</v-btn></router-link>
+                <router-link to="/Level2"><v-btn color="green">Play</v-btn></router-link>
               </v-card-actions>
           </v-card>
         </v-layout>

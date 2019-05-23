@@ -3,9 +3,9 @@
     <v-container>
       <v-layout row wrap v-for="j in rows" :key="j">
         <v-flex v-for="n in columns" :key="n">
-          <v-card color="rgb(255, 255, 255, 0.5)" height="100px" width="calc(100%)">
-            Row {{j}}
-            Cell {{n}}
+          <v-card color="rgb(255, 255, 255, 0)" height="100px" width="calc(100%)">
+            <!-- Row {{j}} -->
+            <!-- Cell {{n}} -->
             <div v-if="currentX == j && currentY == n" id="orphy" class="orpheus"></div>
           </v-card>
         </v-flex>
