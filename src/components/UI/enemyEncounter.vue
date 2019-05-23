@@ -66,8 +66,26 @@ export default {
   },
   methods: {
     playerAction_Attack() {
-      // alert("player attack!");
-      this.enemyHp-=10;
+      if (this.isEncounterActive && this.enemyHp > 0) {
+        var enemy_attack = Math.random() >= 0.5;
+        var enemy_damage = Math.floor(Math.random() * 10);
+        var damage = Math.floor(Math.random() * 16);
+        this.enemyHp-=damage;
+        // determine if enemy attack hits
+        if (enemy_attack) {
+          this.$store.state.player.hp -= enemy_damage;
+        }
+        // check if hp is removed after battle
+        if (this.enemyHp < 0) {
+          this.$store.state.player.exp = Math.floor(Math.random() * 20) + 5;
+          this.dialog = false;
+          this.$emit('update:isEncounterActive', false);
+        }
+      }
+      else {
+        this.dialog = false;
+        this.$emit('update:isEncounterActive', false);
+      }
     },
     playerAction_Escape() {
      this.dialog = false;
